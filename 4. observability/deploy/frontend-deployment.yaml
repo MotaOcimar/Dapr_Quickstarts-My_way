@@ -19,6 +19,21 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: dapriosamples/distributed-calculator-react-calculator:latest
+        image: ocimar/distributed-calculator-react-calculator:latest
         ports:
         - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
